@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ruena — AI Study Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="RUENA.CSS"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    </div>
+    <span class="logo-name">Ruena</span>
+  </div>
+  <a class="nav-item active" data-page="dashboard" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span class="nav-item-text">Dashboard</span>
+  </a>
+  <a class="nav-item" data-page="chat" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="nav-item-text">Ask Ruena</span>
+  </a>
+  <a class="nav-item" data-page="upload" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span class="nav-item-text">Upload Notes</span>
+  </a>
+  <a class="nav-item" data-page="explain" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="nav-item-text">Explain Topic</span>
+  </a>
+  <a class="nav-item" data-page="summary" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg><span class="nav-item-text">Summary</span>
+  </a>
+  <a class="nav-item" data-page="quiz" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span class="nav-item-text">Quiz</span>
+  </a>
+  <a class="nav-item" data-page="flashcards" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 4v14"/></svg><span class="nav-item-text">Flashcards</span>
+  </a>
+  <a class="nav-item" data-page="pyq" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg><span class="nav-item-text">PYQ Trainer</span>
+  </a>
+  <a class="nav-item" data-page="weeklywrap" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg><span class="nav-item-text">Weekly Wrap</span>
+  </a>
+  <a class="nav-item" data-page="settings" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg><span class="nav-item-text">Settings</span>
+  </a>
+  <div class="sidebar-spacer"></div>
+  <div class="nav-bottom">
+    <a class="nav-item" href="#" style="gap:12px">
+      <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c4a8f0,#a78de0);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(167,141,224,.4)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:20px;height:20px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <span class="nav-item-text profile-name">Profile</span>
+    </a>
+  </div>
+</aside>
+
+<button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+</button>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="content">
+    <div class="content-inner">
+
+    <!-- DASHBOARD-->
+    <div class="page active" id="page-dashboard">
+      <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr;gap:20px;width:100%">
+        <div class="card" style="display:flex;flex-direction:column;">
+          <div class="tape tape-tc"></div>
+          <div class="card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Upload Study Material
+          </div>
+          <div class="upload-zone" style="flex:1;" onclick="navigate('upload')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            <span>Drag and drop your study notes here<br/>or click to browse</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="tape tape-tr"></div>
+          <div style="font-size:17px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin-bottom:16px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            AI Study Tools
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:10px;width:100%">
+            <div class="tool-card blue"><div class="tool-card-label"><div class="icon-box blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><span>Summary</span></div><button class="tool-btn" onclick="navigate('summary')">Summarize Now</button></div>
+            <div class="tool-card purple"><div class="tool-card-label"><div class="icon-box purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span>Explain Topic</span></div><button class="tool-btn" onclick="navigate('explain')">Explain It</button></div>
+            <div class="tool-card yellow"><div class="tool-card-label"><div class="icon-box yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><span>Create Quiz</span></div><button class="tool-btn" onclick="navigate('quiz')">Make Quiz</button></div>
+            <div class="tool-card green"><div class="tool-card-label"><div class="icon-box green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 4v14"/></svg></div><span>Flashcards</span></div><button class="tool-btn" onclick="navigate('flashcards')">Make Flashcards</button></div>
+            <!-- QUICK ASK — spans full width -->
+            <div style="grid-column:1 / span 2;background:linear-gradient(135deg,#ede8f8,#ddd0f5);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px">
+              <div style="font-size:13px;font-weight:700;color:var(--active-text);display:flex;align-items:center;gap:7px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Quick Ask Ruena
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <input type="text" id="quick-ask-input" placeholder="Ask anything... e.g. What is a deadlock?" style="flex:1;border:1.5px solid rgba(167,141,224,.3);border-radius:8px;padding:8px 12px;font-family:var(--font);font-size:13px;background:rgba(255,255,255,.7);color:var(--text);outline:none"/>
+                <button onclick="quickAsk()" style="background:var(--purple);color:white;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;white-space:nowrap">Ask →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STREAK CARD -->
+        <div class="card" style="display:flex;flex-direction:column;gap:14px">
+          <div class="tape" style="top:-7px;right:30px;background:#fcd9a0;opacity:.8;width:44px;height:14px;border-radius:3px"></div>
+          <div style="font-size:17px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px">
+            <span style="font-size:22px">🔥</span> Study Streak
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:linear-gradient(135deg,#fceec7,#fcd9a0);border-radius:14px;padding:18px">
+            <span style="font-size:48px;font-weight:800;color:#e07000;line-height:1" id="streak-count">0</span>
+            <span style="font-size:13px;font-weight:700;color:#a05000">Day Streak 🔥</span>
+          </div>
+          <div class="streak-days" id="streak-days-row">
+            <div class="streak-day"><div class="streak-dot" id="sd-0">·</div><span class="streak-day-label">M</span></div>
+            <div class="streak-day"><div class="streak-dot" id="sd-1">·</div><span class="streak-day-label">T</span></div>
+            <div class="streak-day"><div class="streak-dot" id="sd-2">·</div><span class="streak-day-label">W</span></div>
+            <div class="streak-day"><div class="streak-dot" id="sd-3">·</div><span class="streak-day-label">T</span></div>
+            <div class="streak-day"><div class="streak-dot" id="sd-4">·</div><span class="streak-day-label">F</span></div>
+            <div class="streak-day"><div class="streak-dot" id="sd-5">·</div><span class="streak-day-label">S</span></div>
+            <div class="streak-day"><div class="streak-dot" id="sd-6">·</div><span class="streak-day-label">S</span></div>
+          </div>
+          <div style="background:#f4f1f9;border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:12px;font-weight:600;color:var(--muted)">Best Streak</span>
+            <span style="font-size:14px;font-weight:800;color:var(--active-text)" id="best-streak-val">0 Days</span>
+          </div>
+          <div style="background:#fff8ee;border:1.5px solid #fcd9a0;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:#a05000">⏳ Today's Activity</span>
+              <span style="font-size:12px;font-weight:800;color:#e07000" id="today-pct">0%</span>
+            </div>
+            <div style="background:#fcd9a0;border-radius:10px;height:8px;width:100%">
+              <div style="background:linear-gradient(90deg,#f59500,#e07000);height:8px;border-radius:10px;width:0%;transition:width .4s ease" id="today-bar"></div>
+            </div>
+            <span style="font-size:11px;color:#a05000;font-weight:600" id="today-msg">Start studying to build your streak! 🔥</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tape tape-br"></div>
+        <div class="tape" style="top:-7px;left:40px;background:#c8d8f0;opacity:.7"></div>
+        <div style="font-size:17px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+          PYQ Trainer
+        </div>
+        <div class="pyq-grid">
+          <div class="pyq-upload" onclick="navigate('pyq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>Upload Previous Year Question Paper</div>
+          <div class="pyq-insight"><div class="icon-box slate" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="pyq-insight-label">Exam Pattern Insights</div><div class="pyq-insight-sub">Analyze key trends</div></div>
+          <div class="pyq-right" style="grid-column:3 / span 2;display:flex;flex-direction:column;gap:10px">
+            <div class="pyq-tag"><div class="icon-box" style="background:var(--green-card);color:#2a7a4a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div><div class="pyq-tag-title">Most Asked Topics</div><div class="pyq-tag-sub">Focus on important areas</div></div></div>
+            <button class="pyq-btn purple" onclick="navigate('pyq')"><div class="icon-box purple" style="width:28px;height:28px;border-radius:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Generate Practice Questions</button>
+            <button class="pyq-btn teal" onclick="navigate('pyq')"><div class="icon-box" style="width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.75);color:#1a5f65"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>Start Mock Test</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOAD NOTES -->
+    <div class="page" id="page-upload">
+      <div class="section-title">Upload Notes</div>
+      <div class="section-sub">Add your study material — PDFs, text files, or paste directly</div>
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:20px">
+        <div class="card">
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>File Upload</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+            <span style="background:var(--purple-light);color:var(--active-text);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700">PDF</span>
+            <span style="background:var(--purple-light);color:var(--active-text);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700">TXT</span>
+            <span style="background:var(--purple-light);color:var(--active-text);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700">DOC</span>
+            <span style="background:var(--purple-light);color:var(--active-text);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700">DOCX</span>
+          </div>
+          <div class="upload-big-zone" id="drop-zone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            <span>Drag and drop your files here</span>
+            <span class="hint">or click to browse from your device</span>
+            <input type="file" id="file-input" accept=".pdf,.txt,.doc,.docx" style="display:none" multiple/>
+          </div>
+          <div id="file-list"></div>
+          <div style="margin-top:16px">
+            <button class="btn-primary" onclick="document.getElementById('file-input').click()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Browse Files
+            </button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card">
+            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Paste Notes</div>
+            <textarea class="paste-area" id="paste-notes-area" placeholder="Paste your notes or text here..."></textarea>
+            <div style="margin-top:10px">
+              <button class="btn-primary" id="save-notes-btn" onclick="savePastedNotes()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Save Notes
+              </button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--text)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;color:var(--text)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Recent Uploads</div>
+            <div class="recent-list" id="recent-uploads-list">
+              <div class="empty-state" style="padding:20px 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:36px;height:36px;color:#d4ccc0;display:block;margin:0 auto 8px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><p style="font-size:13px">No files uploaded yet</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPLAIN TOPIC -->
+    <div class="page" id="page-explain">
+      <div class="section-title">Explain Topic</div>
+      <div class="section-sub">Enter any topic and get a simple, clear explanation instantly</div>
+      <div class="explain-grid">
+        <div class="card">
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Ask a Topic</div>
+          <div class="input-label">Topic or Question</div>
+          <input type="text" class="text-input" id="explain-input" placeholder="e.g. What is recursion?" style="margin-bottom:4px"/>
+          <div class="input-label" style="margin-top:14px">Explanation Level</div>
+          <div class="level-pills">
+            <button class="level-pill active" onclick="setLevel(this)">Simple</button>
+            <button class="level-pill" onclick="setLevel(this)">Intermediate</button>
+            <button class="level-pill" onclick="setLevel(this)">Detailed</button>
+          </div>
+          <button class="btn-primary" onclick="showExplain()" style="width:100%;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explain It
+          </button>
+          <div style="margin-top:18px">
+            <div class="input-label">Quick Topics</div>
+            <div class="quick-topics">
+              <button class="quick-topic" onclick="setTopic('Recursion')">Recursion</button>
+              <button class="quick-topic" onclick="setTopic('Normalization')">Normalization</button>
+              <button class="quick-topic" onclick="setTopic('OS Scheduling')">OS Scheduling</button>
+              <button class="quick-topic" onclick="setTopic('SQL Joins')">SQL Joins</button>
+              <button class="quick-topic" onclick="setTopic('Linked List')">Linked List</button>
+              <button class="quick-topic" onclick="setTopic('Binary Tree')">Binary Tree</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Explanation</span>
+            <button class="summary-tool-btn" id="copy-btn" onclick="copyExplain()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+          </div>
+          <div class="explain-output empty" id="explain-output">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:#d4ccc0;display:block;margin:0 auto 10px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Enter a topic and click "Explain It"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="page" id="page-quiz">
+      <div class="section-title">Quiz Generator</div>
+      <div class="section-sub">Generate custom practice quizzes from your notes</div>
+      <div class="quiz-setup-grid">
+        <div class="card">
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Quiz Settings</div>
+          <div class="input-label">Topic / Subject</div>
+          <input type="text" class="text-input" id="quiz-topic" placeholder="e.g. Database Normalization" style="margin-bottom:12px"/>
+          <div class="input-label">Number of Questions</div>
+          <select class="select-input" id="quiz-num" style="margin-bottom:12px"><option value="5">5 Questions</option><option value="10" selected>10 Questions</option><option value="15">15 Questions</option><option value="20">20 Questions</option></select>
+          <div class="input-label">Question Type</div>
+          <select class="select-input" id="quiz-type" style="margin-bottom:16px">
+            <option value="mcq">Multiple Choice</option>
+            <option value="tf">True / False</option>
+            <option value="short">Short Answer</option>
+            <option value="mixed">Mixed</option>
+          </select>
+          <button class="btn-primary" onclick="generateQuiz()" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>Generate Quiz</button>
+        </div>
+        <div class="card" style="overflow-y:auto;max-height:calc(100vh - 240px)">
+          <div class="card-title" style="justify-content:space-between"><span>Questions</span><span id="quiz-score-label" style="font-size:13px;font-weight:600;color:var(--muted)"></span></div>
+          <div id="quiz-area">
+            <div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><p>Configure settings and click<br/>Generate Quiz</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div class="page" id="page-flashcards">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div><div class="section-title">Flashcards</div><div class="section-sub" style="margin-bottom:0">Flip through cards to revise key concepts</div></div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <input type="text" id="fc-topic" class="text-input" placeholder="Enter topic..." style="width:180px;margin-bottom:0"/>
+          <div class="fc-view-toggle">
+            <button class="fc-view-btn active" onclick="setFcView('study',this)">Study Mode</button>
+            <button class="fc-view-btn" onclick="setFcView('grid',this)">All Cards</button>
+          </div>
+          <button class="btn-primary" id="fc-gen-btn" onclick="generateFlashcards()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><polygon points="5 3 19 12 5 21 5 3"/></svg>Generate</button>
+        </div>
+      </div>
+      <div id="fc-study-view" class="flashcard-area">
+        <div class="fc-progress"><div class="fc-progress-bar" id="fc-prog" style="width:20%"></div></div>
+        <div class="flashcard" id="main-fc" onclick="flipCard()">
+          <div class="flashcard-inner">
+            <div class="flashcard-front"><div class="flashcard-label">Question</div><div class="flashcard-text" id="fc-q">What is recursion?</div><div class="flashcard-hint">Click to reveal answer</div></div>
+            <div class="flashcard-back"><div class="flashcard-label">Answer</div><div class="flashcard-text" id="fc-a">A function that calls itself with a smaller version of the same problem until a base case is reached.</div></div>
+          </div>
+        </div>
+        <div class="fc-controls">
+          <button class="fc-btn" onclick="prevCard()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Prev</button>
+          <span class="fc-counter" id="fc-counter">1 / 5</span>
+          <button class="fc-btn" onclick="nextCard()">Next<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+      <div id="fc-grid-view" style="display:none">
+        <div class="fc-grid-container" id="fc-grid"></div>
+      </div>
+    </div>
+
+    <!-- PYQ TRAINER -->
+    <div class="page" id="page-pyq">
+      <div class="section-title">PYQ Trainer</div>
+      <div class="section-sub">Upload previous year papers and discover exam patterns</div>
+      <div class="pyq-full-grid">
+        <div class="card">
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Upload PYQ Paper</div>
+          <div class="upload-big-zone" id="pyq-drop-zone" style="padding:38px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg><span>Upload Previous Year Question Paper</span><span class="hint">PDF files supported · One file at a time</span></div>
+          <div style="margin-top:16px">
+            <div class="card-title" style="color:var(--text);font-size:14px;margin-bottom:10px">Most Asked Topics</div>
+            <div style="display:flex;flex-direction:column;gap:8px" id="pyq-topic-bars">
+              <div class="empty-state" style="padding:14px 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:#d4ccc0;display:block;margin:0 auto 8px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><p style="font-size:12px;color:var(--muted)">Upload a PYQ paper to see topic analysis</p></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card">
+            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Exam Insights</div>
+            <div class="insight-grid">
+              <div class="insight-card"><div class="insight-card-label">Papers Analyzed</div><div class="insight-card-value" id="pyq-papers">0</div><div class="insight-card-sub">Uploaded</div></div>
+              <div class="insight-card"><div class="insight-card-label">Total Questions</div><div class="insight-card-value" id="pyq-total-q">—</div><div class="insight-card-sub">Extracted</div></div>
+              <div class="insight-card"><div class="insight-card-label">Key Topics</div><div class="insight-card-value" id="pyq-key-topics">—</div><div class="insight-card-sub">Identified</div></div>
+              <div class="insight-card"><div class="insight-card-label">Avg Difficulty</div><div class="insight-card-value" id="pyq-difficulty">—</div><div class="insight-card-sub">Level</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Practice</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <button class="pyq-btn purple" style="font-size:14px;padding:13px 18px" onclick="generatePYQPractice()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Generate Practice Questions</button>
+              <button class="pyq-btn teal" style="font-size:14px;padding:13px 18px" onclick="startPYQMockTest()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Start Full Mock Test</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock test cards generated from PYQ -->
+      <div id="pyq-mock-section" style="margin-top:24px;display:none">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div style="background:var(--purple);height:3px;border-radius:3px;width:28px"></div>
+          <span style="font-size:14px;font-weight:800;color:var(--active-text)">Mock Tests — From Your Paper</span>
+          <div style="background:var(--purple);height:3px;border-radius:3px;flex:1"></div>
+        </div>
+        <div class="mock-grid" id="pyq-mock-cards"></div>
+      </div>
+    </div>
+
+    <!--  SUMMARY-->
+    <div class="page" id="page-summary">
+      <div class="section-title">Chapter Summary</div>
+      <div class="section-sub">Get concise summaries of your uploaded notes</div>
+      <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:20px">
+        <div class="card">
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Select Notes</div>
+          <div style="display:flex;flex-direction:column;gap:8px" id="summary-notes-list">
+            <div class="empty-state" style="padding:16px 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:#d4ccc0;display:block;margin:0 auto 8px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><p style="font-size:12px;color:var(--muted)">Upload notes to select them here</p></div>
+          </div>
+          <div style="margin-top:14px">
+            <input type="text" id="summary-topic-input" class="text-input" placeholder="Or type a topic to summarize..." style="margin-bottom:10px"/>
+            <button class="btn-primary" style="width:100%;justify-content:center" onclick="generateSummary()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Generate Summary</button>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+            <button class="summary-tool-btn" onclick="copySummary()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+            <button class="summary-tool-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</button>
+            <button class="summary-tool-btn" onclick="summaryToFlashcards()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 4v14"/></svg>Make Flashcards</button>
+          </div>
+          <div class="summary-output" id="summary-output">
+            <div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:#d4ccc0;display:block;margin:0 auto 10px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Type a topic or upload notes, then click Generate Summary</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--WEEKLY WRAP -->
+    <div class="page" id="page-weeklywrap">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div>
+          <div class="section-title">📅 Weekly Wrap</div>
+          <div class="section-sub" style="margin-bottom:0" id="wrap-date-range">Week of — · —</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#fceec7,#fcd9a0);border-radius:12px;padding:10px 18px;text-align:center">
+          <div style="font-size:24px;font-weight:800;color:#e07000" id="wrap-streak-badge">0 🔥</div>
+          <div style="font-size:11px;font-weight:700;color:#a05000">Day Streak</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <div class="insight-card"><div class="insight-card-label">Total Study Time</div><div class="insight-card-value" id="wrap-study-time">0m</div><div class="insight-card-sub">This session</div></div>
+        <div class="insight-card"><div class="insight-card-label">Topics Studied</div><div class="insight-card-value" id="wrap-topics">0</div><div class="insight-card-sub">This session</div></div>
+        <div class="insight-card"><div class="insight-card-label">Quizzes Taken</div><div class="insight-card-value" id="wrap-quizzes">0</div><div class="insight-card-sub" id="wrap-avg-score">No scores yet</div></div>
+        <div class="insight-card"><div class="insight-card-label">Flashcards Done</div><div class="insight-card-value" id="wrap-flashcards">0</div><div class="insight-card-sub">Cards reviewed</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:20px">
+        <div class="card">
+          <div class="card-title">📚 Topics Studied This Week</div>
+          <div style="display:flex;flex-direction:column;gap:8px" id="wrap-topic-bars">
+            <div class="empty-state" style="padding:14px 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:#d4ccc0;display:block;margin:0 auto 8px"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg><p style="font-size:12px;color:var(--muted)">Start studying to see your topics</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🎯 Quiz Performance</div>
+          <div style="display:flex;flex-direction:column;gap:10px" id="wrap-quiz-scores">
+            <div class="empty-state" style="padding:14px 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:#d4ccc0;display:block;margin:0 auto 8px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><p style="font-size:12px;color:var(--muted)">Take quizzes to see your scores</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="justify-content:space-between">
+          <span>✨ AI Generated Week Summary</span>
+          <button class="summary-tool-btn" onclick="generateWeeklyWrap()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><polygon points="5 3 19 12 5 21 5 3"/></svg>Regenerate</button>
+        </div>
+        <div class="summary-output" id="weekly-wrap-output" style="border:none;padding:0">
+          <div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:#d4ccc0;display:block;margin:0 auto 10px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Your AI weekly summary will appear here</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASK RUENA CHAT-->
+    <div class="page" id="page-chat" style="flex:1;min-height:0;height:100%">
+      <div style="margin-bottom:4px">
+        <div class="section-title" style="margin-bottom:2px">Ask Ruena</div>
+        <div class="section-sub" style="margin-bottom:0">Your AI study companion — ask anything, anytime ✨</div>
+      </div>
+      <div style="display:flex;flex-direction:column;flex:1;background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;min-height:0;height:calc(100vh - 160px)">
+        <!-- CHAT MESSAGES -->
+        <div id="chat-messages" style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px">
+          <!-- welcome message -->
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#c4a8f0,#a78de0);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" style="width:17px;height:17px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div style="background:var(--purple-light);border-radius:0 12px 12px 12px;padding:12px 16px;max-width:75%">
+              <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:4px">Ruena</div>
+              <div style="font-size:14px;color:var(--text);line-height:1.6">Hi! I'm Ruena, your AI study companion 👋 Ask me anything — topics, concepts, doubts, or just say what subject you're studying and I'll help you out!</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;padding-left:44px">
+            <button class="quick-topic" onclick="sendQuickMsg('Explain recursion simply')">Explain recursion</button>
+            <button class="quick-topic" onclick="sendQuickMsg('What is database normalization?')">Normalization</button>
+            <button class="quick-topic" onclick="sendQuickMsg('How does OS scheduling work?')">OS Scheduling</button>
+            <button class="quick-topic" onclick="sendQuickMsg('Difference between stack and queue')">Stack vs Queue</button>
+          </div>
+        </div>
+        <!-- CHAT INPUT -->
+        <div style="padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center;background:white">
+          <input type="text" id="chat-input" placeholder="Ask Ruena anything..." style="flex:1;border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-family:var(--font);font-size:14px;background:var(--bg);color:var(--text);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--purple)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')sendChat()"/>
+          <button onclick="sendChat()" style="background:var(--purple);color:white;border:none;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:0;transition:all .2s;overflow:hidden" onmouseover="this.querySelector('.send-text').style.maxWidth='60px';this.querySelector('.send-text').style.marginLeft='6px';this.style.gap='0'" onmouseout="this.querySelector('.send-text').style.maxWidth='0';this.querySelector('.send-text').style.marginLeft='0'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span class="send-text" style="max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .2s ease, margin-left .2s ease;font-size:14px;font-weight:700">Send</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS-->
+    <div class="page" id="page-settings">
+      <div class="section-title">Settings</div>
+      <div class="section-sub">Customize your Ruena experience</div>
+      <div class="settings-grid">
+        <div class="card">
+          <div class="card-title" style="color:var(--text)">Preferences</div>
+          <div class="settings-row"><div><div class="settings-label">Auto-generate Summary</div><div class="settings-sub">On every new upload</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div class="settings-label">Quiz Timer</div><div class="settings-sub">Show countdown during quizzes</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div class="settings-label">Flashcard Shuffle</div><div class="settings-sub">Randomize card order</div></div><label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div class="settings-label">Dark Mode</div><div class="settings-sub">Switch to dark theme</div></div><label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label></div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color:var(--text)">AI Settings</div>
+          <div class="input-label">Default Explanation Level</div>
+          <div class="level-pills"><button class="level-pill active" onclick="setLevel(this)">Simple</button><button class="level-pill" onclick="setLevel(this)">Intermediate</button><button class="level-pill" onclick="setLevel(this)">Detailed</button></div>
+          <div class="settings-row"><div><div class="settings-label">Language</div><div class="settings-sub">Explanation language</div></div><select class="select-input" style="width:140px"><option>English</option><option>Hindi</option><option>Marathi</option></select></div>
+        </div>
+      </div>
+    </div>
+
+    </div><!-- end content-inner -->
+  </div><!-- end content -->
+</div><!-- end main -->
+
+<script src="RUENA.JS"></script>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-inner">
+    <button class="mobile-nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Home
+    </button>
+    <button class="mobile-nav-item" data-page="chat" onclick="navigate('chat')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Ask
+    </button>
+    <button class="mobile-nav-item" data-page="upload" onclick="navigate('upload')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Upload
+    </button>
+    <button class="mobile-nav-item" data-page="explain" onclick="navigate('explain')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Explain
+    </button>
+    <button class="mobile-nav-item" data-page="summary" onclick="navigate('summary')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>Summary
+    </button>
+    <button class="mobile-nav-item" data-page="quiz" onclick="navigate('quiz')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Quiz
+    </button>
+    <button class="mobile-nav-item" data-page="flashcards" onclick="navigate('flashcards')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 4v14"/></svg>Cards
+    </button>
+    <button class="mobile-nav-item" data-page="pyq" onclick="navigate('pyq')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>PYQ
+    </button>
+    <button class="mobile-nav-item" data-page="weeklywrap" onclick="navigate('weeklywrap')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Wrap
+    </button>
+    <button class="mobile-nav-item" data-page="settings" onclick="navigate('settings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Settings
+    </button>
+  </div>
+</nav>
+<!-- EXAM SIMULATION OVERLAY -->
+<div id="exam-overlay">
+  <div class="exam-header">
+    <div>
+      <div class="exam-title" id="exam-title">Mock Exam</div>
+      <div style="font-size:12px;color:var(--muted);font-weight:600" id="exam-meta">0 Questions</div>
+    </div>
+    <div class="exam-timer" id="exam-timer">00:00</div>
+    <button onclick="confirmExitExam()" style="background:#f0ece3;border:2px solid var(--border);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);color:var(--muted)">✕ Exit</button>
+  </div>
+  <div class="exam-progress"><div class="exam-progress-fill" id="exam-prog" style="width:0%"></div></div>
+  <div class="exam-body">
+    <div class="exam-questions" id="exam-questions"></div>
+    <div class="exam-sidebar">
+      <div class="q-grid-label">Questions</div>
+      <div class="q-grid" id="q-grid"></div>
+      <div style="margin-top:8px;padding-top:12px;border-top:1.5px solid var(--border)">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--muted)"><div style="width:12px;height:12px;border-radius:3px;background:var(--purple)"></div>Answered</div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--muted)"><div style="width:12px;height:12px;border-radius:3px;background:white;border:2px solid var(--border)"></div>Pending</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px" id="exam-answered-count">0 / 0 answered</div>
+        <button class="exam-submit-btn" onclick="submitExam()">Submit Exam</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--EXAM RESULTS-->
+<div id="exam-results">
+  <div style="max-width:760px;margin:0 auto">
+    <div class="results-hero">
+      <div class="results-score-ring" id="results-ring">
+        <div style="font-size:28px;font-weight:800" id="results-pct">0%</div>
+        <div style="font-size:11px;font-weight:700;color:var(--muted)">Score</div>
+      </div>
+      <div style="font-size:22px;font-weight:800;color:var(--active-text);margin-bottom:6px" id="results-title">Exam Complete!</div>
+      <div style="font-size:14px;color:var(--muted);font-weight:600" id="results-subtitle"></div>
+      <div style="display:flex;justify-content:center;gap:20px;margin-top:20px;flex-wrap:wrap" id="results-stats"></div>
+    </div>
+    <div style="font-size:15px;font-weight:800;color:var(--active-text);margin-bottom:12px">Answer Review</div>
+    <div class="results-review" id="results-review"></div>
+    <div style="display:flex;gap:12px;justify-content:center;padding-bottom:32px">
+      <button class="btn-primary" onclick="closeResults()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to PYQ Trainer
+      </button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
