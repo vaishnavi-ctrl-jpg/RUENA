@@ -21,7 +21,7 @@
   "homepage": "https://github.com/vaishnavi-ctrl-jpg/RUENA#readme",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "express": "^4.22.1",
     "firebase-admin": "^13.7.0",
     "multer": "^2.1.1"
   }
