@@ -1,12 +1,74 @@
+// ROUTE PROTECTION — redirect if not logged in
+if(!localStorage.getItem('ruena_user_id')){
+  window.location.href = '/auth';
+}
+
+// Show username in sidebar
+const _userName = localStorage.getItem('ruena_user_name') || 'Student';
+const _userEmail = localStorage.getItem('ruena_user_id') || '';
+const _userInitial = _userName[0].toUpperCase();
+const _pname = document.getElementById('profile-name');
+const _pemail = document.getElementById('profile-email');
+const _pavatar = document.getElementById('profile-avatar');
+if(_pname) _pname.textContent = _userName;
+if(_pemail) _pemail.textContent = _userEmail;
+if(_pavatar) _pavatar.textContent = _userInitial;
+
+// Logout function
+function doLogout(){
+  localStorage.removeItem('ruena_user_id');
+  localStorage.removeItem('ruena_user_name');
+  window.location.href = '/auth';
+}
+
+// USER ID — from localStorage after login
+function getUserId(){
+  return localStorage.getItem('ruena_user_id') || 'guest';
+}
+
+// BACKEND API CALLS
+
+// 1. Save notes to backend
+async function saveNoteToBackend(content){
+  try{
+    await fetch('http://localhost:5000/api/notes', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ userId: getUserId(), content })
+    });
+  } catch(e){ console.warn('Could not save note:', e.message); }
+}
+
+// 2. Save quiz score to backend
+async function saveQuizScoreToBackend(score, total){
+  try{
+    await fetch('http://localhost:5000/api/quiz-scores', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ userId: getUserId(), score, total })
+    });
+  } catch(e){ console.warn('Could not save score:', e.message); }
+}
+
+// 3. Load user stats from backend
+async function loadStatsFromBackend(){
+  try{
+    const res = await fetch(`http://localhost:5000/api/stats/${getUserId()}`);
+    const data = await res.json();
+    return data;
+  } catch(e){ console.warn('Could not load stats:', e.message); return null; }
+}
+
+// GROQ AI — calls backend proxy
 async function groq(messages, temperature=0.7){
-  const res = await fetch('/api/chat', {
+  const res = await fetch('http://localhost:5000/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages, temperature })
+    body: JSON.stringify({ userId: getUserId(), message: messages[messages.length-1]?.content, messages, temperature })
   });
   const data = await res.json();
   if(!res.ok) throw new Error(data.error || 'API error');
-  return data.reply;
+  return data.reply || data.response;
 }
 
 function setLoading(el, msg='Ruena is thinking...'){
@@ -103,6 +165,7 @@ function savePastedNotes(){
   pastedNotes = text;
   // Save as virtual "Pasted Notes" entry
   uploadedNotes['Pasted Notes'] = text;
+  saveNoteToBackend(text);
   refreshNotesList();
   const btn = document.getElementById('save-notes-btn');
   const orig = btn.innerHTML;
@@ -883,8 +946,20 @@ function closeResults(){
   navigate('pyq');
 }
 
-// Wire PYQ practice button
-
+// REDIRECT TO PYQ WITH TOAST
+function redirectToPYQ(){
+  // Show toast
+  const toast = document.createElement('div');
+  toast.textContent = '📄 Upload a PYQ paper to unlock this!';
+  toast.style.cssText = `position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
+    background:#3b2a6e;color:white;padding:12px 22px;border-radius:12px;
+    font-size:13px;font-weight:700;font-family:var(--font);z-index:9999;
+    box-shadow:0 4px 20px rgba(0,0,0,.15);animation:fadeUp .3s ease`;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+  // Redirect to PYQ page
+  setTimeout(() => navigate('pyq'), 400);
+}
 
 // MOCK TESTS
 async function startMockTest(topic, numQ){
@@ -893,7 +968,6 @@ async function startMockTest(topic, numQ){
   document.getElementById('quiz-num').value=numQ;
   await generateQuiz();
 }
-
 
 // WEEKLY WRAP
 async function generateWeeklyWrap(){
@@ -938,6 +1012,7 @@ function trackQuiz(topic, score, total){
   stats.quizzesTaken++;
   stats.quizScores.push({topic: topic||'Quiz', score, total});
   stats.streak = Math.min(stats.streak + 1, 7);
+  saveQuizScoreToBackend(score, total);
   updateWrapStats(); updateStreakCard();
 }
 function trackFlashcards(count){
@@ -1031,3 +1106,13 @@ updateCard();
 setupPYQUpload();
 updateWrapStats();
 updateStreakCard();
+
+// Load stats from backend on startup
+loadStatsFromBackend().then(data => {
+  if(!data) return;
+  // Update wrap stats with real backend data
+  const el = id => document.getElementById(id);
+  if(el('wrap-quizzes')) el('wrap-quizzes').textContent = data.totalQuizzes || 0;
+  if(el('wrap-avg-score') && data.avgScore) el('wrap-avg-score').textContent = `Avg score ${data.avgScore}%`;
+  if(el('streak-count') && data.streak) el('streak-count').textContent = data.streak;
+});
