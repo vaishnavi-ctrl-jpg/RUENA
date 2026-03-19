@@ -1,0 +1,5 @@
+node_modules/
+ruena-firebase-key.json
+ruena-data.json
+.env
+.DS_Store
