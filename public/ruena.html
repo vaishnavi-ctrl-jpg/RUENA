@@ -67,7 +67,7 @@
   <div class="content">
     <div class="content-inner">
 
-    <!-- DASHBOARD-->
+    <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr;gap:20px;width:100%">
         <div class="card" style="display:flex;flex-direction:column;">
@@ -150,9 +150,9 @@
         </div>
         <div class="pyq-grid">
           <div class="pyq-upload" onclick="navigate('pyq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>Upload Previous Year Question Paper</div>
-          <div class="pyq-insight"><div class="icon-box slate" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="pyq-insight-label">Exam Pattern Insights</div><div class="pyq-insight-sub">Analyze key trends</div></div>
+          <div class="pyq-insight" onclick="redirectToPYQ()" style="cursor:pointer"><div class="icon-box slate" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="pyq-insight-label">Exam Pattern Insights</div><div class="pyq-insight-sub">Upload a PYQ to unlock</div></div>
           <div class="pyq-right" style="grid-column:3 / span 2;display:flex;flex-direction:column;gap:10px">
-            <div class="pyq-tag"><div class="icon-box" style="background:var(--green-card);color:#2a7a4a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div><div class="pyq-tag-title">Most Asked Topics</div><div class="pyq-tag-sub">Focus on important areas</div></div></div>
+            <div class="pyq-tag" onclick="redirectToPYQ()" style="cursor:pointer"><div class="icon-box" style="background:var(--green-card);color:#2a7a4a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div><div class="pyq-tag-title">Most Asked Topics</div><div class="pyq-tag-sub">Upload a PYQ to unlock</div></div></div>
             <button class="pyq-btn purple" onclick="navigate('pyq')"><div class="icon-box purple" style="width:28px;height:28px;border-radius:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Generate Practice Questions</button>
             <button class="pyq-btn teal" onclick="navigate('pyq')"><div class="icon-box" style="width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.75);color:#1a5f65"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>Start Mock Test</button>
           </div>
@@ -355,7 +355,7 @@
       </div>
     </div>
 
-    <!--  SUMMARY-->
+    <!-- SUMMARY -->
     <div class="page" id="page-summary">
       <div class="section-title">Chapter Summary</div>
       <div class="section-sub">Get concise summaries of your uploaded notes</div>
@@ -383,7 +383,7 @@
       </div>
     </div>
 
-    <!--WEEKLY WRAP -->
+    <!-- WEEKLY WRAP-->
     <div class="page" id="page-weeklywrap">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
         <div>
@@ -429,7 +429,7 @@
       </div>
     </div>
 
-    <!-- ASK RUENA CHAT-->
+    <!--ASK RUENA CHAT-->
     <div class="page" id="page-chat" style="flex:1;min-height:0;height:100%">
       <div style="margin-bottom:4px">
         <div class="section-title" style="margin-bottom:2px">Ask Ruena</div>
@@ -466,7 +466,7 @@
       </div>
     </div>
 
-    <!-- SETTINGS-->
+    <!--SETTINGS-->
     <div class="page" id="page-settings">
       <div class="section-title">Settings</div>
       <div class="section-sub">Customize your Ruena experience</div>
@@ -491,7 +491,7 @@
   </div><!-- end content -->
 </div><!-- end main -->
 
-<script src="RUENA.JS"></script>
+<script src="ruena.js"></script>
 
 <!-- MOBILE BOTTOM NAV -->
 <nav class="mobile-nav" id="mobile-nav">
@@ -528,7 +528,7 @@
     </button>
   </div>
 </nav>
-<!-- EXAM SIMULATION OVERLAY -->
+<!--EXAM SIMULATION OVERLAY-->
 <div id="exam-overlay">
   <div class="exam-header">
     <div>
