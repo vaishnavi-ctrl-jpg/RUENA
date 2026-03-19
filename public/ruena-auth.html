@@ -273,7 +273,10 @@ function doLogin(){
   if(!email.includes('@')){ showError('login-error','login-error-msg','Enter a valid email address.'); return; }
   const btn=document.getElementById('login-btn');
   btn.disabled=true; btn.textContent='Signing in...';
-  // backend lead wires Firebase signInWithEmailAndPassword here
+  // Save userId as email and redirect to app
+  localStorage.setItem('ruena_user_id', email);
+  localStorage.setItem('ruena_user_name', email.split('@')[0]);
+  window.location.href = '/';
 }
 
 function doSignup(){
@@ -289,7 +292,11 @@ function doSignup(){
   if(pass!==confirm){ showError('signup-error','signup-error-msg','Passwords do not match.'); return; }
   const btn=document.getElementById('signup-btn');
   btn.disabled=true; btn.textContent='Creating account...';
-  // backend lead wires Firebase createUserWithEmailAndPassword here
+  // Save userId and redirect
+  localStorage.setItem('ruena_user_id', email);
+  localStorage.setItem('ruena_user_name', `${fname} ${lname}`);
+  showSuccess('signup-success');
+  setTimeout(() => { window.location.href = '/'; }, 1500);
 }
 
 function doForgot(){
@@ -298,7 +305,6 @@ function doForgot(){
   if(!email||!email.includes('@')){ showError('forgot-error','forgot-error-msg','Enter a valid email address.'); return; }
   const btn=document.getElementById('forgot-btn');
   btn.disabled=true; btn.textContent='Sending...';
-  // backend lead wires Firebase sendPasswordResetEmail here
 }
 
 document.addEventListener('keydown',e=>{
