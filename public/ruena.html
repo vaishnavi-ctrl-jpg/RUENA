@@ -15,7 +15,10 @@
     <div class="logo-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     </div>
-    <span class="logo-name">Ruena</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="logo-name">Ruena</span>
+      <span style="font-size:9px;font-weight:800;color:var(--purple);letter-spacing:1.2px;text-transform:uppercase;border:1.5px solid var(--purple);border-radius:20px;padding:2px 7px;line-height:1.6">Beta</span>
+    </div>
   </div>
   <a class="nav-item active" data-page="dashboard" href="#">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span class="nav-item-text">Dashboard</span>
@@ -67,7 +70,7 @@
   <div class="content">
     <div class="content-inner">
 
-    <!-- DASHBOARD -->
+    <!--DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr;gap:20px;width:100%">
         <div class="card" style="display:flex;flex-direction:column;">
@@ -112,10 +115,12 @@
           <div style="font-size:17px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px">
             <span style="font-size:22px">🔥</span> Study Streak
           </div>
-          <div style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:linear-gradient(135deg,#fceec7,#fcd9a0);border-radius:14px;padding:18px">
-            <span style="font-size:48px;font-weight:800;color:#e07000;line-height:1" id="streak-count">0</span>
+          <!-- big count -->
+          <div style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:linear-gradient(135deg,#fceec7,#fcd9a0);border-radius:14px;padding:18px;position:relative;overflow:hidden">
+            <span style="font-size:56px;font-weight:800;color:#e07000;line-height:1;transition:transform .3s" id="streak-count">0</span>
             <span style="font-size:13px;font-weight:700;color:#a05000">Day Streak 🔥</span>
           </div>
+          <!-- day dots -->
           <div class="streak-days" id="streak-days-row">
             <div class="streak-day"><div class="streak-dot" id="sd-0">·</div><span class="streak-day-label">M</span></div>
             <div class="streak-day"><div class="streak-dot" id="sd-1">·</div><span class="streak-day-label">T</span></div>
@@ -125,10 +130,12 @@
             <div class="streak-day"><div class="streak-dot" id="sd-5">·</div><span class="streak-day-label">S</span></div>
             <div class="streak-day"><div class="streak-dot" id="sd-6">·</div><span class="streak-day-label">S</span></div>
           </div>
+          <!-- best streak -->
           <div style="background:#f4f1f9;border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
             <span style="font-size:12px;font-weight:600;color:var(--muted)">Best Streak</span>
-            <span style="font-size:14px;font-weight:800;color:var(--active-text)" id="best-streak-val">0 Days</span>
+            <span style="font-size:14px;font-weight:800;color:var(--active-text)" id="best-streak-val">0 Days 🏆</span>
           </div>
+          <!-- today activity -->
           <div style="background:#fff8ee;border:1.5px solid #fcd9a0;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
             <div style="display:flex;align-items:center;justify-content:space-between">
               <span style="font-size:12px;font-weight:700;color:#a05000">⏳ Today's Activity</span>
@@ -137,7 +144,7 @@
             <div style="background:#fcd9a0;border-radius:10px;height:8px;width:100%">
               <div style="background:linear-gradient(90deg,#f59500,#e07000);height:8px;border-radius:10px;width:0%;transition:width .4s ease" id="today-bar"></div>
             </div>
-            <span style="font-size:11px;color:#a05000;font-weight:600" id="today-msg">Start studying to build your streak! 🔥</span>
+            <span style="font-size:11px;color:#a05000;font-weight:600" id="today-msg">Do 15 activities today to start your streak! 🔥</span>
           </div>
         </div>
       </div>
@@ -160,7 +167,7 @@
       </div>
     </div>
 
-    <!-- UPLOAD NOTES -->
+    <!--UPLOAD NOTES -->
     <div class="page" id="page-upload">
       <div class="section-title">Upload Notes</div>
       <div class="section-sub">Add your study material — PDFs, text files, or paste directly</div>
@@ -206,7 +213,7 @@
       </div>
     </div>
 
-    <!-- EXPLAIN TOPIC -->
+    <!--  EXPLAIN TOPIC-->
     <div class="page" id="page-explain">
       <div class="section-title">Explain Topic</div>
       <div class="section-sub">Enter any topic and get a simple, clear explanation instantly</div>
@@ -258,14 +265,34 @@
           <div class="input-label">Topic / Subject</div>
           <input type="text" class="text-input" id="quiz-topic" placeholder="e.g. Database Normalization" style="margin-bottom:12px"/>
           <div class="input-label">Number of Questions</div>
-          <select class="select-input" id="quiz-num" style="margin-bottom:12px"><option value="5">5 Questions</option><option value="10" selected>10 Questions</option><option value="15">15 Questions</option><option value="20">20 Questions</option></select>
+          <div class="custom-select" style="margin-bottom:12px">
+            <div class="custom-select-trigger" onclick="toggleDropdown('quiz-num-dd')">
+              <span id="quiz-num-label">10 Questions</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="custom-select-dropdown" id="quiz-num-dd">
+              <div class="custom-select-option" onclick="selectOption('quiz-num','5','quiz-num-label','5 Questions','quiz-num-dd')">5 Questions</div>
+              <div class="custom-select-option active" onclick="selectOption('quiz-num','10','quiz-num-label','10 Questions','quiz-num-dd')">10 Questions</div>
+              <div class="custom-select-option" onclick="selectOption('quiz-num','15','quiz-num-label','15 Questions','quiz-num-dd')">15 Questions</div>
+              <div class="custom-select-option" onclick="selectOption('quiz-num','20','quiz-num-label','20 Questions','quiz-num-dd')">20 Questions</div>
+            </div>
+            <input type="hidden" id="quiz-num" value="10"/>
+          </div>
+
           <div class="input-label">Question Type</div>
-          <select class="select-input" id="quiz-type" style="margin-bottom:16px">
-            <option value="mcq">Multiple Choice</option>
-            <option value="tf">True / False</option>
-            <option value="short">Short Answer</option>
-            <option value="mixed">Mixed</option>
-          </select>
+          <div class="custom-select" style="margin-bottom:16px">
+            <div class="custom-select-trigger" onclick="toggleDropdown('quiz-type-dd')">
+              <span id="quiz-type-label">Multiple Choice</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="custom-select-dropdown" id="quiz-type-dd">
+              <div class="custom-select-option active" onclick="selectOption('quiz-type','mcq','quiz-type-label','Multiple Choice','quiz-type-dd')">Multiple Choice</div>
+              <div class="custom-select-option" onclick="selectOption('quiz-type','tf','quiz-type-label','True / False','quiz-type-dd')">True / False</div>
+              <div class="custom-select-option" onclick="selectOption('quiz-type','short','quiz-type-label','Short Answer','quiz-type-dd')">Short Answer</div>
+              <div class="custom-select-option" onclick="selectOption('quiz-type','mixed','quiz-type-label','Mixed','quiz-type-dd')">Mixed</div>
+            </div>
+            <input type="hidden" id="quiz-type" value="mcq"/>
+          </div>
           <button class="btn-primary" onclick="generateQuiz()" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>Generate Quiz</button>
         </div>
         <div class="card" style="overflow-y:auto;max-height:calc(100vh - 240px)">
@@ -277,7 +304,7 @@
       </div>
     </div>
 
-    <!-- FLASHCARDS -->
+    <!--FLASHCARDS-->
     <div class="page" id="page-flashcards">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
         <div><div class="section-title">Flashcards</div><div class="section-sub" style="margin-bottom:0">Flip through cards to revise key concepts</div></div>
@@ -309,7 +336,7 @@
       </div>
     </div>
 
-    <!-- PYQ TRAINER -->
+    <!--PYQ TRAINER-->
     <div class="page" id="page-pyq">
       <div class="section-title">PYQ Trainer</div>
       <div class="section-sub">Upload previous year papers and discover exam patterns</div>
@@ -355,7 +382,7 @@
       </div>
     </div>
 
-    <!-- SUMMARY -->
+    <!--SUMMARY-->
     <div class="page" id="page-summary">
       <div class="section-title">Chapter Summary</div>
       <div class="section-sub">Get concise summaries of your uploaded notes</div>
@@ -383,7 +410,7 @@
       </div>
     </div>
 
-    <!-- WEEKLY WRAP-->
+    <!--WEEKLY WRAP -->
     <div class="page" id="page-weeklywrap">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
         <div>
@@ -429,7 +456,7 @@
       </div>
     </div>
 
-    <!--ASK RUENA CHAT-->
+    <!-- ═══ ASK RUENA CHAT ═══ -->
     <div class="page" id="page-chat" style="flex:1;min-height:0;height:100%">
       <div style="margin-bottom:4px">
         <div class="section-title" style="margin-bottom:2px">Ask Ruena</div>
@@ -466,10 +493,42 @@
       </div>
     </div>
 
-    <!--SETTINGS-->
+    <!-- SETTINGS-->
     <div class="page" id="page-settings">
       <div class="section-title">Settings</div>
       <div class="section-sub">Customize your Ruena experience</div>
+
+      <!-- Profile + Logout card -->
+      <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#c4a8f0,#a78de0);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <span style="font-size:20px;font-weight:800;color:white" id="settings-avatar">?</span>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:800;color:var(--active-text)" id="settings-name">Student</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:500" id="settings-email"></div>
+          </div>
+        </div>
+        <button onclick="openModal('signout-modal')" style="display:flex;align-items:center;gap:8px;background:#ffebee;color:#c62828;border:1.5px solid #ffcdd2;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:800;font-family:var(--font);cursor:pointer;transition:all .15s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </button>
+      </div>
+
+      <!-- Delete account -->
+      <div class="card" style="border-color:#ffcdd2;background:#fff8f8">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:#c62828">Delete Account</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">Permanently delete your account and all your data. This cannot be undone.</div>
+          </div>
+          <button onclick="openModal('delete-modal')" style="display:flex;align-items:center;gap:8px;background:#c62828;color:white;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:800;font-family:var(--font);cursor:pointer;transition:opacity .15s;white-space:nowrap;flex-shrink:0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            Delete Account
+          </button>
+        </div>
+      </div>
+
       <div class="settings-grid">
         <div class="card">
           <div class="card-title" style="color:var(--text)">Preferences</div>
@@ -488,8 +547,41 @@
     </div>
 
     </div><!-- end content-inner -->
-  </div><!-- end content -->
-</div><!-- end main -->
+
+  <!--SIGN OUT MODAL -->
+  <div id="signout-modal" style="display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(0,0,0,.35);backdrop-filter:blur(4px)">
+    <div style="background:var(--card);border-radius:24px;padding:36px 32px;max-width:380px;width:90%;text-align:center;box-shadow:0 8px 48px rgba(0,0,0,.15);animation:slideUp .3s ease">
+      <div style="font-size:40px;margin-bottom:12px">👋</div>
+      <div style="font-size:18px;font-weight:800;color:var(--active-text);margin-bottom:8px">Sign out of Ruena?</div>
+      <div style="font-size:13px;color:var(--muted);font-weight:500;line-height:1.6;margin-bottom:24px">Your streak and progress are saved. You can sign back in anytime and pick up where you left off!</div>
+      <div style="display:flex;gap:10px">
+        <button onclick="closeModal('signout-modal')" style="flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border);background:white;font-size:14px;font-weight:700;font-family:var(--font);cursor:pointer;color:var(--text)">Cancel</button>
+        <button onclick="confirmSignOut()" style="flex:1;padding:12px;border-radius:10px;border:none;background:var(--purple);color:white;font-size:14px;font-weight:800;font-family:var(--font);cursor:pointer">Yes, Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE ACCOUNT MODAL-->
+  <div id="delete-modal" style="display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(0,0,0,.35);backdrop-filter:blur(4px)">
+    <div style="background:var(--card);border-radius:24px;padding:36px 32px;max-width:380px;width:90%;text-align:center;box-shadow:0 8px 48px rgba(0,0,0,.15);animation:slideUp .3s ease">
+      <div style="font-size:40px;margin-bottom:12px">🗑️</div>
+      <div style="font-size:18px;font-weight:800;color:#c62828;margin-bottom:8px">Delete your account?</div>
+      <div style="font-size:13px;color:var(--muted);font-weight:500;line-height:1.6;margin-bottom:8px">This will permanently delete:</div>
+      <div style="background:#fff0f0;border-radius:10px;padding:12px 16px;text-align:left;margin-bottom:20px;font-size:13px;font-weight:600;color:#c62828;line-height:1.8">
+        ❌ All your uploaded notes<br/>
+        ❌ All quiz scores & history<br/>
+        ❌ Your streak & progress<br/>
+        ❌ Your entire account
+      </div>
+      <div style="font-size:12px;color:#e53935;font-weight:700;margin-bottom:20px">⚠️ This cannot be undone!</div>
+      <div style="display:flex;gap:10px">
+        <button onclick="closeModal('delete-modal')" style="flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border);background:white;font-size:14px;font-weight:700;font-family:var(--font);cursor:pointer;color:var(--text)">Cancel</button>
+        <button onclick="confirmDeleteAccount()" style="flex:1;padding:12px;border-radius:10px;border:none;background:#c62828;color:white;font-size:14px;font-weight:800;font-family:var(--font);cursor:pointer">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
 
 <script src="ruena.js"></script>
 
@@ -528,7 +620,7 @@
     </button>
   </div>
 </nav>
-<!--EXAM SIMULATION OVERLAY-->
+<!--EXAM SIMULATION OVERLAY -->
 <div id="exam-overlay">
   <div class="exam-header">
     <div>
@@ -556,7 +648,7 @@
   </div>
 </div>
 
-<!--EXAM RESULTS-->
+<!-- EXAM RESULTS-->
 <div id="exam-results">
   <div style="max-width:760px;margin:0 auto">
     <div class="results-hero">
