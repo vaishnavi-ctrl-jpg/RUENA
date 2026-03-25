@@ -669,7 +669,28 @@
     </div>
   </div>
 </div>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-    <script src="./ruena.js"></script>
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } 
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAFPCOO73P8e8G-rlWCcPb23G7CGci1ScI",
+    authDomain: "ruena-6c23f.firebaseapp.com",
+    databaseURL: "https://ruena-6c23f-default-rtdb.firebaseio.com",
+    projectId: "ruena-6c23f",
+    storageBucket: "ruena-6c23f.firebasestorage.app",
+    messagingSenderId: "689374241877",
+    appId: "1:689374241877:web:ad9ca0beb6f9d56ddea0dc"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.auth = auth;
+  window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+  window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+  window.sendPasswordResetEmail = sendPasswordResetEmail;
+</script>
 </body>
 </html>
