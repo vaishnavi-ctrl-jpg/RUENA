@@ -1,3 +1,12 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyAFPCOO73P8e8G-rlWCcPb23G7CGci1ScI",
+    authDomain: "ruena-6c23f.firebaseapp.com",
+    databaseURL: "https://ruena-6c23f-default-rtdb.firebaseio.com",
+    projectId: "ruena-6c23f",
+    storageBucket: "ruena-6c23f.firebasestorage.app",
+    messagingSenderId: "689374241877",
+    appId: "1:689374241877:web:ad9ca0beb6f9d56ddea0dc"
+  };
 // ROUTE PROTECTION — redirect if not logged in
 if(!localStorage.getItem('ruena_user_id')){
   window.location.href = '/auth';
